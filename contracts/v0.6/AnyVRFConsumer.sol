@@ -5,7 +5,7 @@ import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 import "@uniswap/v2-core/contracts/interfaces/IERC20.sol";
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 
-abstract contract RandomNumberConsumer is VRFConsumerBase {
+abstract contract AnyVRFConsumer is VRFConsumerBase {
     
     bytes32 internal s_keyHash;
     uint256 internal s_linkFee;
@@ -28,7 +28,7 @@ abstract contract RandomNumberConsumer is VRFConsumerBase {
         s_uniswapRouter = IUniswapV2Router02(uniswapRouter);
     }
 
-    function requestRandomnessWith(address token, uint256 deadline, uint256 seed) internal returns (bytes32 requestId) {
+    function requestRandomnessWith(address token, uint256 deadline, uint256 seed) internal returns (bytes32) {
         address[] memory path = getTokenToLinkPath(token);
         IERC20 erc20 = IERC20(token);
         uint256 tokenAmountIn = s_uniswapRouter.getAmountsIn(s_linkFee, path)[0];

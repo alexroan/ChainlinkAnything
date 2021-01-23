@@ -17,6 +17,23 @@ task("accounts", "Prints the list of accounts", async () => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.6.12",
+  solidity: {
+    version: "0.6.12",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200
+      }
+    }
+  },
+  defaultNetwork: "kovan",
+  networks: {
+    hardhat: {
+    },
+    kovan: {
+      url: "https://kovan.infura.io/v3/56b11f04682541d1ae4a621799ac0178",
+      accounts: [privateKey1]
+    }
+  },
 };
 
