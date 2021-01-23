@@ -28,7 +28,7 @@ abstract contract RandomNumberConsumer is VRFConsumerBase {
         s_uniswapRouter = IUniswapV2Router02(uniswapRouter);
     }
 
-    function requestRandomness(address token, uint256 deadline, uint256 seed) internal returns (bytes32 requestId) {
+    function requestRandomnessWith(address token, uint256 deadline, uint256 seed) internal returns (bytes32 requestId) {
         address[] memory path = getTokenToLinkPath(token);
         IERC20 erc20 = IERC20(token);
         uint256 tokenAmountIn = s_uniswapRouter.getAmountsIn(s_linkFee, path)[0];
@@ -46,7 +46,7 @@ abstract contract RandomNumberConsumer is VRFConsumerBase {
             deadline
         );
         require(amounts[1] >= s_linkFee, "Not enough LINK from swap");
-        return super.requestRandomness(s_keyHash, s_linkFee, seed);
+        return requestRandomness(s_keyHash, s_linkFee, seed);
     }
 
     function getTokenToLinkPath(address token) internal view returns (address[] memory) {
