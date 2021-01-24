@@ -32,7 +32,7 @@ module.exports = {
     },
     kovan: {
       url: "https://kovan.infura.io/v3/56b11f04682541d1ae4a621799ac0178",
-      accounts: [privateKey1]
+      // accounts: [privateKey1]
     }
   },
 };
